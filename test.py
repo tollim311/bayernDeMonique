@@ -10,6 +10,7 @@ with open ('StatsBomb/Data/ManCity_Arsenal_events.json') as t:
 
 data=pd.DataFrame(data)
 
+#Select the Man City pass only
 team_name=[]
 team_id=[]
 n=len(data['team'])
@@ -26,6 +27,8 @@ mask_pass_MCW=(data['pass'].notnull()) & (data.team_id == 746)
 df_pass_MCW = data.loc[mask_pass_MCW]
 df_pass_MCW = df_pass_MCW.reset_index(drop=True)
 
+#Take the information about the passes
+#ie the x,y coordonates for start and end, the height and the outcome(0 if incompleted or 1 if completed)
 n=len(df_pass_MCW['pass'])
 pass_details_length=[]
 pass_details_angle=[]
@@ -50,8 +53,7 @@ for i in range (n):
     pass_details_loc_y.append(pass_details_endloc_y[i] - (math.sin(pass_details_angle[i]) *pass_details_length[i])) 
     pass_details_height.append(df_pass_MCW['pass'][i]['height'])
 
-df_pass_MCW['pass_length']=pass_details_length
-df_pass_MCW['pass_angle']=pass_details_angle
+
 df_pass_MCW['pass_endloc_x']=pass_details_endloc_x
 df_pass_MCW['pass_endloc_y']=pass_details_endloc_y
 df_pass_MCW['pass_height']=pass_details_height
@@ -59,32 +61,29 @@ df_pass_MCW['pass_loc_x']=pass_details_loc_x
 df_pass_MCW['pass_loc_y']=pass_details_loc_y
 df_pass_MCW['pass_outcome']=pass_outcome
 
+#Create a df with the pass and their caracteristics
 mask_area_pass=(df_pass_MCW['pass_endloc_x'] > 102) & (df_pass_MCW['pass_endloc_y'] > 18) & (df_pass_MCW['pass_endloc_y'] < 62)
-
 df_area_pass_MCW=df_pass_MCW.loc[mask_area_pass].reset_index(drop=True)
 
+#Select the completed pass
 mask_completed=(df_area_pass_MCW['pass_outcome']==1)
 df_area_pass_MCW_completed=df_area_pass_MCW.loc[mask_completed].reset_index(drop=True)
 
+#Select the incompleted pass
 mask_incompleted=(df_area_pass_MCW['pass_outcome']==0)
 df_area_pass_MCW_incompleted=df_area_pass_MCW.loc[mask_incompleted].reset_index(drop=True)
 
-print(df_area_pass_MCW.info())
-
+#Create a pitch as a graph
 pitch = Pitch(line_color = "black")
-
 fig, ax = pitch.grid(grid_height=0.9, title_height=0.06, axis=False, 
                       endnote_height=0.04, title_space=0, endnote_space=0)
 #Circle for the pass
 #pitch.scatter(df_seger.x, df_seger.y, alpha = 0.7, s=100, color='blue', ax=ax['pitch'])
+
+
+#Just a vizualition test
 #Arrows for the direction and length of Pass
 pitch.arrows(df_area_pass_MCW_completed.pass_loc_x, df_area_pass_MCW_completed.pass_loc_y, df_area_pass_MCW_completed.pass_endloc_x, df_area_pass_MCW_completed.pass_endloc_y,width=3, color='blue', ax=ax['pitch'])
 pitch.arrows(df_area_pass_MCW_incompleted.pass_loc_x, df_area_pass_MCW_incompleted.pass_loc_y, df_area_pass_MCW_incompleted.pass_endloc_x, df_area_pass_MCW_incompleted.pass_endloc_y,width=3, color='red', ax=ax['pitch'])
 fig.suptitle("passes through penlaty area", fontsize=25)
 plt.show()
-
-#,orient='index', columns=['recipient','length', 'angle', 'height', 'end_location', 'type', 'body_part'])
-
-#mask_MCW = (data.type_name == 'Pass') & (data.team_id == 746) & (df.outcome_name.isnull()) & (df.sub_type_name != "Throw-in")
-
-{'recipient': {'id': 25632, 'name': 'Yui Hasegawa'}, 'length': 16.03278, 'angle': -2.9087162, 'height': {'id': 1, 'name': 'Ground Pass'}, 'end_location': [44.4, 36.3], 'type': {'id': 65, 'name': 'Kick Off'}, 'body_part': {'id': 40, 'name': 'Right Foot'}}
