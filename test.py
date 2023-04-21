@@ -71,6 +71,10 @@ n=len(df_area_pass_MCW['pass'])
 completed_zone=[0,0,0,0,0,0,0]
 total_zone=[0,0,0,0,0,0,0]
 
+ending_completed_zone=[0,0]
+ending_total_zone=[0,0]
+
+#Count the number of pass in each area and the number of completed ones
 for i in range(n):
     if (df_area_pass_MCW['pass_loc_x'][i]>60 and df_area_pass_MCW['pass_loc_x'][i]<102):
         if(df_area_pass_MCW['pass_loc_y'][i]>0 and df_area_pass_MCW['pass_loc_y'][i]<=18):
@@ -104,26 +108,12 @@ for i in range(n):
         completed_zone[6]=completed_zone[6]+df_area_pass_MCW['pass_outcome'][i]
         total_zone[6]=total_zone[6]+1
 
-
-"""
-mask_zone_1=(df_pass_MCW['pass_loc_x'] > 60) & (df_pass_MCW['pass_loc_x'] < 102) & (df_pass_MCW['pass_loc_y'] > 0) & (df_pass_MCW['pass_loc_y'] < 18)
-mask_zone_2=(df_pass_MCW['pass_loc_x'] > 60) & (df_pass_MCW['pass_loc_x'] < 102) & (df_pass_MCW['pass_loc_y'] > 18) & (df_pass_MCW['pass_loc_y'] < 40)
-mask_zone_3=(df_pass_MCW['pass_loc_x'] > 60) & (df_pass_MCW['pass_loc_x'] < 102) & (df_pass_MCW['pass_loc_y'] > 40) & (df_pass_MCW['pass_loc_y'] < 62)
-mask_zone_4=(df_pass_MCW['pass_loc_x'] > 60) & (df_pass_MCW['pass_loc_x'] < 102) & (df_pass_MCW['pass_loc_y'] > 62) & (df_pass_MCW['pass_loc_y'] < 80)
-mask_zone_5=(df_pass_MCW['pass_loc_x'] > 102) & (df_pass_MCW['pass_loc_x'] < 120) & (df_pass_MCW['pass_loc_y'] > 0) & (df_pass_MCW['pass_loc_y'] < 18)
-mask_zone_8=(df_pass_MCW['pass_loc_x'] > 102) & (df_pass_MCW['pass_loc_x'] < 120) & (df_pass_MCW['pass_loc_y'] > 62) & (df_pass_MCW['pass_loc_y'] < 80)
-
-df_pass_zone_1=df_area_pass_MCW.loc[mask_zone_1].reset_index(drop=True)
-df_pass_zone_2=df_area_pass_MCW.loc[mask_zone_2].reset_index(drop=True)
-df_pass_zone_3=df_area_pass_MCW.loc[mask_zone_3].reset_index(drop=True)
-df_pass_zone_4=df_area_pass_MCW.loc[mask_zone_4].reset_index(drop=True)
-df_pass_zone_5=df_area_pass_MCW.loc[mask_zone_5].reset_index(drop=True)
-df_pass_zone_8=df_area_pass_MCW.loc[mask_zone_8].reset_index(drop=True)
-
-pourcentage_1=df_pass_zone_1['pass_outcome'].sum()
-"""
-print(completed_zone)
-print(total_zone)
+    if(df_area_pass_MCW['pass_endloc_y'][i]<40):
+        ending_completed_zone[0]=ending_completed_zone[0]+np.abs(df_area_pass_MCW['pass_outcome'][i]-1)
+        ending_total_zone[0]=ending_total_zone[0]+1
+    else:
+        ending_completed_zone[1]=ending_completed_zone[1]+np.abs(df_area_pass_MCW['pass_outcome'][i]-1)
+        ending_total_zone[1]=ending_total_zone[1]+1
 
 #Select the completed pass
 mask_completed=(df_area_pass_MCW['pass_outcome']==1)
@@ -137,14 +127,18 @@ df_area_pass_MCW_incompleted=df_area_pass_MCW.loc[mask_incompleted].reset_index(
 pitch = Pitch(line_color = "black")
 fig, ax = pitch.grid(grid_height=0.9, title_height=0.06, axis=False, 
                       endnote_height=0.04, title_space=0, endnote_space=0)
-#Circle for the pass
-#pitch.scatter(df_seger.x, df_seger.y, alpha = 0.7, s=100, color='blue', ax=ax['pitch'])
 
+#Plot the number of pass through the penalty area by area and label the accuracy in each area
+for i in range (4):
+    pitch.scatter(81, (y_limit_zone[i]+y_limit_zone[i+1])/2, alpha = 0.6, s=(completed_zone[i]/total_zone[i])*10000, color='lightblue', ax=ax['pitch'])
+    pitch.annotate(str(completed_zone[i])+"/"+str(total_zone[i]), xy=(81, (y_limit_zone[i]+y_limit_zone[i+1])/2), c='black', va='center', ha='center', weight = "bold", size=16, ax=ax["pitch"], zorder = 4)
 
-#Just a vizualition test
-#Arrows for the direction and length of Pass
-pitch.arrows(df_area_pass_MCW_completed.pass_loc_x, df_area_pass_MCW_completed.pass_loc_y, df_area_pass_MCW_completed.pass_endloc_x, df_area_pass_MCW_completed.pass_endloc_y,width=3, color='blue', ax=ax['pitch'])
-pitch.arrows(df_area_pass_MCW_incompleted.pass_loc_x, df_area_pass_MCW_incompleted.pass_loc_y, df_area_pass_MCW_incompleted.pass_endloc_x, df_area_pass_MCW_incompleted.pass_endloc_y,width=3, color='red', ax=ax['pitch'])
-#pitch.arrows(df_pass_zone_3.pass_loc_x, df_pass_zone_3.pass_loc_y, df_pass_zone_3.pass_endloc_x, df_pass_zone_3.pass_endloc_y,width=3, color='yellow', ax=ax['pitch'])
-fig.suptitle("passes through penlaty area", fontsize=25)
+for i in range(2):
+    pitch.scatter(111, (y_limit_zone[i+1]+y_limit_zone[i+2])/2, alpha = 0.6, s=(ending_completed_zone[i]/ending_total_zone[i])*10000, color='gold', ax=ax['pitch'])
+    pitch.annotate(str(ending_completed_zone[i])+"/"+str(ending_total_zone[i]), xy=(111, (y_limit_zone[i+1]+y_limit_zone[i+2])/2), c='black', va='center', ha='center', weight = "bold", size=16, ax=ax["pitch"], zorder = 4)
+    pitch.scatter(111, (y_limit_zone[3*i]+y_limit_zone[3*i+1])/2, alpha = 0.6, s=(completed_zone[4]/total_zone[4])*10000, color='lightblue', ax=ax['pitch'])
+    pitch.annotate(str(completed_zone[4+i])+"/"+str(total_zone[4+i]), xy=(111, (y_limit_zone[3*i]+y_limit_zone[3*i+1])/2), c='black', va='center', ha='center', weight = "bold", size=16, ax=ax["pitch"], zorder = 4)
+
+pitch.annotate("Blue : the pass through the box\nGold : the pass reiceves in the box\n Diameter of the circle represents the accuracy", xy=(30,10), c='black', va='center', ha='center', weight = "bold", size=16, ax=ax["pitch"], zorder = 4)
+fig.suptitle("passes through penlaty area by area on pitch and their success in the box", fontsize=25)
 plt.show()
