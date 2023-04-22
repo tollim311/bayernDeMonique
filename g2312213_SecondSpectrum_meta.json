@@ -1,0 +1,341 @@
+{
+  "venueId": null,
+  "description": "MCI-W - TOT-W : 2023-3-5",
+  "startTime": 1678024891160,
+  "year": 2023,
+  "month": 3,
+  "day": 5,
+  "pitchLength": 105.1736831665039,
+  "pitchWidth": 68.15968322753906,
+  "fps": 25.0,
+  "periods": [
+    {
+      "number": 1,
+      "startFrameClock": 1678024891160,
+      "endFrameClock": 1678027720400,
+      "startFrameIdx": 0,
+      "endFrameIdx": 70731,
+      "homeAttPositive": true
+    },
+    {
+      "number": 2,
+      "startFrameClock": 1678028643920,
+      "endFrameClock": 1678031671160,
+      "startFrameIdx": 70732,
+      "endFrameIdx": 146413,
+      "homeAttPositive": false
+    }
+  ],
+  "homePlayers": [
+    {
+      "name": "C. Kelly",
+      "number": 9,
+      "position": "RW",
+      "ssiId": "08d71d20-85ad-4d98-8bc0-36b8e39e517a",
+      "optaId": "174349",
+      "optaUuid": "8gxse7h6ucubo3weq7sp9dnf9"
+    },
+    {
+      "name": "K. Casparij",
+      "number": 2,
+      "position": "SUB",
+      "ssiId": "8c34093f-843c-41a4-b02d-1ed289de00a3",
+      "optaId": "447080",
+      "optaUuid": "8hq106ex872xezlr1j901kpux"
+    },
+    {
+      "name": "E. Roebuck",
+      "number": 1,
+      "position": "GK",
+      "ssiId": "3706abe8-9aba-49c6-8a8f-4f4ef2a9be70",
+      "optaId": "186022",
+      "optaUuid": "20ccu2ngcfo3cvczhzk682ju1"
+    },
+    {
+      "name": "A. Greenwood",
+      "number": 5,
+      "position": "LCB",
+      "ssiId": "a5ec6d76-4788-4894-bea2-0a165d4a36ba",
+      "optaId": "96535",
+      "optaUuid": "c6k1w8sothxmc08dbhqjzp1w5"
+    },
+    {
+      "name": "L. Aleixandri",
+      "number": 4,
+      "position": "RB",
+      "ssiId": "eb23d9b0-cf56-4eb2-9a72-0022f70e3125",
+      "optaId": "434287",
+      "optaUuid": "470uu9issmbdfyhxjq75gdbs9"
+    },
+    {
+      "name": "M. Fowler",
+      "number": 8,
+      "position": "SUB",
+      "ssiId": "e49a0083-44e5-4399-8b69-845c4585617d",
+      "optaId": "457401",
+      "optaUuid": null
+    },
+    {
+      "name": "Khadija Shaw",
+      "number": 21,
+      "position": "ST",
+      "ssiId": "724f3280-015e-440e-b9b7-0598833e9c2d",
+      "optaId": "463306",
+      "optaUuid": "cm84oje8txj7m34zuhhv68ct1"
+    },
+    {
+      "name": "Y. Hasegawa",
+      "number": 25,
+      "position": "LDM",
+      "ssiId": "0746befc-a701-4b33-8faf-b3cccccf17bb",
+      "optaId": "192194",
+      "optaUuid": "7op9czmiln7ktmvetw97scz4l"
+    },
+    {
+      "name": "L. Hemp",
+      "number": 11,
+      "position": "LW",
+      "ssiId": "db47bb9a-634f-4ef6-9cd0-d6daf74164d7",
+      "optaId": "186043",
+      "optaUuid": "10d8jj5vwrmib55tth0isfvft"
+    },
+    {
+      "name": "D. Castellanos",
+      "number": 10,
+      "position": "SUB",
+      "ssiId": "1b3bd37a-8d98-4834-8d8f-072e2038e7c4",
+      "optaId": "459038",
+      "optaUuid": "et72990p9axru09oxv51hokwl"
+    },
+    {
+      "name": "Julie Blakstad",
+      "number": 41,
+      "position": "SUB",
+      "ssiId": "1027258f-9b54-4cbf-b221-8ab62c169e08",
+      "optaId": "243637",
+      "optaUuid": "a8p1m5xzbpbzere0gmb3rye0a"
+    },
+    {
+      "name": "A. MacIver",
+      "number": 22,
+      "position": "SUB",
+      "ssiId": "25cccc61-791d-4d74-8ef1-db3afa17a8e8",
+      "optaId": "219423",
+      "optaUuid": "6vqain7mmp94wueprv9aj5xp1"
+    },
+    {
+      "name": "S. Houghton",
+      "number": 6,
+      "position": "RCB",
+      "ssiId": "aa53177e-f36d-4298-9c67-3c93a49c3325",
+      "optaId": "14772",
+      "optaUuid": "5vuw3lywsh90t394m8h6g5ihh"
+    },
+    {
+      "name": "Filippa Angeldahl",
+      "number": 12,
+      "position": "RDM",
+      "ssiId": "471aedfa-df6f-44b4-b008-7b2cef31f3cb",
+      "optaId": "191726",
+      "optaUuid": "3ddo1m631pf9ruzzpaujs9gph"
+    },
+    {
+      "name": "L. Ouahabi",
+      "number": 15,
+      "position": "LB",
+      "ssiId": "293704f8-5331-4d70-b691-c39a763f08f8",
+      "optaId": "242633",
+      "optaUuid": "eb0h79vh5dwggjx7shj0ovetx"
+    },
+    {
+      "name": "L. Coombs",
+      "number": 7,
+      "position": "CAM",
+      "ssiId": "1ab5dc11-1e32-4e6b-a385-5b736ec14763",
+      "optaId": "96385",
+      "optaUuid": "7gmh6g5c39asg7gnthx1jxp79"
+    },
+    {
+      "name": "E. Morgan",
+      "number": 14,
+      "position": "SUB",
+      "ssiId": "02780bab-8db4-4310-ad80-308ae2fa0a86",
+      "optaId": "246319",
+      "optaUuid": "bo5e35lsptja0pnlvk1y38dex"
+    },
+    {
+      "name": "Jemima Dahou",
+      "number": 42,
+      "position": "SUB",
+      "ssiId": "27211092-da7c-4755-8e7a-ed1a5158628e",
+      "optaId": null,
+      "optaUuid": null
+    },
+    {
+      "name": "D. Stokes",
+      "number": 3,
+      "position": "SUB",
+      "ssiId": "2261b537-5d03-422a-94c5-7b1c33856088",
+      "optaId": "178419",
+      "optaUuid": "1cyzpbgl74lage7toh7f1tgb9"
+    }
+  ],
+  "awayPlayers": [
+    {
+      "name": "T. Korpela",
+      "number": 1,
+      "position": "GK",
+      "ssiId": "7532a0a6-01f2-4c3b-a5ca-25d4d4eb6493",
+      "optaId": "112806",
+      "optaUuid": "7f3opq72gey1boxe6vcgmfvth"
+    },
+    {
+      "name": "A. Turner",
+      "number": 4,
+      "position": "RCB",
+      "ssiId": "099a513d-34ea-4aef-aa2c-a4a7f40aebe5",
+      "optaId": "96455",
+      "optaUuid": "eoc724h5j6mnvvu1nbumezmxh"
+    },
+    {
+      "name": "M. Bartrip",
+      "number": 5,
+      "position": "CB",
+      "ssiId": "5c9ece34-5645-4eab-bb77-06450cd5fcd7",
+      "optaId": "171708",
+      "optaUuid": "elelvar8kyxwpfqzwr1v00b85"
+    },
+    {
+      "name": "K. Harrop",
+      "number": 6,
+      "position": "LCB",
+      "ssiId": "bd7ebf4d-75c9-43ac-b073-d89e421893f6",
+      "optaId": "96484",
+      "optaUuid": "2zdgbwd6y5u4pd08upf1sda6t"
+    },
+    {
+      "name": "Nikola Karczewska",
+      "number": 9,
+      "position": "ST",
+      "ssiId": "cc90a14d-40cd-4aab-ba4e-3dbbd158638d",
+      "optaId": "491747",
+      "optaUuid": "xfhvn9tfu8wwd1whgo1jgand"
+    },
+    {
+      "name": "Celin Bizet Ildhusoy",
+      "number": 14,
+      "position": "RB",
+      "ssiId": "7a995464-6ea5-4a7a-9fdf-7bff4288ebd1",
+      "optaId": "475116",
+      "optaUuid": null
+    },
+    {
+      "name": "A. James",
+      "number": 15,
+      "position": "RCM",
+      "ssiId": "034a713f-7936-497f-ac9c-6ff1fae69897",
+      "optaId": "114407",
+      "optaUuid": "z8vdz64bgqus4c85451nsrf9"
+    },
+    {
+      "name": "M. Iwabuchi",
+      "number": 20,
+      "position": "LM",
+      "ssiId": "6a1d735a-d6d2-4dec-85f6-7b57f1803d72",
+      "optaId": "97160",
+      "optaUuid": "e6pdkq17etv9k527m94sqqu39"
+    },
+    {
+      "name": "R. Ayane",
+      "number": 23,
+      "position": "RM",
+      "ssiId": "e70c0d61-54d9-493b-881a-9a040cfd49fe",
+      "optaId": "168444",
+      "optaUuid": "enqn8azrcz6vks9d21ze9w2c5"
+    },
+    {
+      "name": "D. Spence",
+      "number": 24,
+      "position": "LCM",
+      "ssiId": "a9c20f2b-9bdf-4fa5-8b20-19a6484e4e34",
+      "optaId": "96404",
+      "optaUuid": "drwlmmiguqz2mfzsh6gjmklx"
+    },
+    {
+      "name": "A. Neville",
+      "number": 29,
+      "position": "LB",
+      "ssiId": "d888e3ab-3629-4572-8508-2f4a66028d40",
+      "optaId": "477767",
+      "optaUuid": "tzc4bqcf2wkz1k7d96l8g3my"
+    },
+    {
+      "name": "R. Spencer",
+      "number": 22,
+      "position": "SUB",
+      "ssiId": "e7a46e93-a532-4d19-b255-afd30ec9b17b",
+      "optaId": "96377",
+      "optaUuid": "4vgx21i9mmnoud5h6px197f11"
+    },
+    {
+      "name": "So-Hyun Cho",
+      "number": 8,
+      "position": "SUB",
+      "ssiId": "80b35fad-756a-4a17-b79b-ded6498c184a",
+      "optaId": "209949",
+      "optaUuid": null
+    },
+    {
+      "name": "A. Ale",
+      "number": 13,
+      "position": "SUB",
+      "ssiId": "33adaf57-4e91-4986-82a6-ec9755130551",
+      "optaId": "247816",
+      "optaUuid": "ceww6vauxaqddgogso515rcru"
+    },
+    {
+      "name": "K. Graham",
+      "number": 16,
+      "position": "SUB",
+      "ssiId": "694e1283-97c7-461b-991b-abc1578aa573",
+      "optaId": "491043",
+      "optaUuid": "beeqbcwweng7zflrap12ph7qi"
+    },
+    {
+      "name": "Chioma Ubogagu",
+      "number": 18,
+      "position": "SUB",
+      "ssiId": "268a108e-c956-4f1e-b8a8-8f5a87811469",
+      "optaId": "171710",
+      "optaUuid": "dwclepmsssh2hd8381rjqbufp"
+    },
+    {
+      "name": "Ella Houghton",
+      "number": 37,
+      "position": "SUB",
+      "ssiId": "b2bf7990-17b0-4465-a998-929f95f30d91",
+      "optaId": null,
+      "optaUuid": null
+    },
+    {
+      "name": "Lenna Gunning-WIlliams",
+      "number": 39,
+      "position": "SUB",
+      "ssiId": "d4f7fcb1-bd8f-40cf-84e1-b8997bf0586f",
+      "optaId": "605377",
+      "optaUuid": null
+    }
+  ],
+  "homeScore": 3,
+  "awayScore": 1,
+  "ssiId": "fa5c217b-33ed-42da-bbfa-ad2f680cca40",
+  "optaId": "2312213",
+  "optaUuid": null,
+  "tracksVersion": 2,
+  "homeSsiId": "edfee15e-0dd7-42bc-be2a-289870187ddc",
+  "homeOptaId": "9660",
+  "homeOptaUuid": "36tr17foeaf9ejjmt2txuoy3y",
+  "awaySsiId": "cddcbcf6-0c84-435b-90bb-074e72537ad7",
+  "awayOptaId": "6924",
+  "awayOptaUuid": "9ijyncrxsejz505dbadwr1dir"
+}

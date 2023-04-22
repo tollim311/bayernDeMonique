@@ -1,0 +1,8 @@
+<MetaData sVersion="2.0">
+   <match dtDate="2023-02-11 12:31:07" fPitchXSizeMeters="105.07" fPitchYSizeMeters="68.33" iFrameRateFps="25" iId="2312135">
+      <period iEndFrame="1676121734520" iId="1" iStartFrame="1676118667880"/>
+      <period iEndFrame="1676125665600" iId="2" iStartFrame="1676122668120"/>
+      <period iEndFrame="0" iId="3" iStartFrame="0"/>
+      <period iEndFrame="0" iId="4" iStartFrame="0"/>
+   </match>
+</MetaData>
