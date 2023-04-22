@@ -1,8 +1,0 @@
-<MetaData sVersion="2.0">
-   <match dtDate="2022-10-16 13:02:33" fPitchXSizeMeters="104.97" fPitchYSizeMeters="68.11" iFrameRateFps="25" iId="2312152">
-      <period iEndFrame="1665928356680" iId="1" iStartFrame="1665925353480"/>
-      <period iEndFrame="1665932346640" iId="2" iStartFrame="1665929401800"/>
-      <period iEndFrame="0" iId="3" iStartFrame="0"/>
-      <period iEndFrame="0" iId="4" iStartFrame="0"/>
-   </match>
-</MetaData>
