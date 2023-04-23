@@ -23,7 +23,6 @@ data['team_name']=team_name
 data['team_id']=team_id
 
 mask_pass_MCW=(data['pass'].notnull()) & (data.team_id == 746)
-
 df_pass_MCW = data.loc[mask_pass_MCW]
 df_pass_MCW = df_pass_MCW.reset_index(drop=True)
 
@@ -61,7 +60,7 @@ df_pass_MCW['pass_loc_x']=pass_details_loc_x
 df_pass_MCW['pass_loc_y']=pass_details_loc_y
 df_pass_MCW['pass_outcome']=pass_outcome
 
-#Create a df with the pass and their caracteristics
+#Create a df with the pass and their caracteristics in penalty area
 mask_area_pass=(df_pass_MCW['pass_endloc_x'] > 102) & (df_pass_MCW['pass_endloc_y'] > 18) & (df_pass_MCW['pass_endloc_y'] < 62)
 df_area_pass_MCW=df_pass_MCW.loc[mask_area_pass].reset_index(drop=True)
 
@@ -130,14 +129,17 @@ fig, ax = pitch.grid(grid_height=0.9, title_height=0.06, axis=False,
 
 #Plot the number of pass through the penalty area by area and label the accuracy in each area
 for i in range (4):
-    pitch.scatter(81, (y_limit_zone[i]+y_limit_zone[i+1])/2, alpha = 0.6, s=(completed_zone[i]/total_zone[i])*10000, color='lightblue', ax=ax['pitch'])
-    pitch.annotate(str(completed_zone[i])+"/"+str(total_zone[i]), xy=(81, (y_limit_zone[i]+y_limit_zone[i+1])/2), c='black', va='center', ha='center', weight = "bold", size=16, ax=ax["pitch"], zorder = 4)
+    if(total_zone[i]!=0):
+        pitch.scatter(81, (y_limit_zone[i]+y_limit_zone[i+1])/2, alpha = 0.6, s=(completed_zone[i]/total_zone[i])*10000, color='lightblue', ax=ax['pitch'])
+        pitch.annotate(str(completed_zone[i])+"/"+str(total_zone[i]), xy=(81, (y_limit_zone[i]+y_limit_zone[i+1])/2), c='black', va='center', ha='center', weight = "bold", size=16, ax=ax["pitch"], zorder = 4)
 
 for i in range(2):
-    pitch.scatter(111, (y_limit_zone[i+1]+y_limit_zone[i+2])/2, alpha = 0.6, s=(ending_completed_zone[i]/ending_total_zone[i])*10000, color='gold', ax=ax['pitch'])
-    pitch.annotate(str(ending_completed_zone[i])+"/"+str(ending_total_zone[i]), xy=(111, (y_limit_zone[i+1]+y_limit_zone[i+2])/2), c='black', va='center', ha='center', weight = "bold", size=16, ax=ax["pitch"], zorder = 4)
-    pitch.scatter(111, (y_limit_zone[3*i]+y_limit_zone[3*i+1])/2, alpha = 0.6, s=(completed_zone[4]/total_zone[4])*10000, color='lightblue', ax=ax['pitch'])
-    pitch.annotate(str(completed_zone[4+i])+"/"+str(total_zone[4+i]), xy=(111, (y_limit_zone[3*i]+y_limit_zone[3*i+1])/2), c='black', va='center', ha='center', weight = "bold", size=16, ax=ax["pitch"], zorder = 4)
+    if(ending_total_zone[i]!=0):
+        pitch.scatter(111, (y_limit_zone[i+1]+y_limit_zone[i+2])/2, alpha = 0.6, s=(ending_completed_zone[i]/ending_total_zone[i])*10000, color='gold', ax=ax['pitch'])
+        pitch.annotate(str(ending_completed_zone[i])+"/"+str(ending_total_zone[i]), xy=(111, (y_limit_zone[i+1]+y_limit_zone[i+2])/2), c='black', va='center', ha='center', weight = "bold", size=16, ax=ax["pitch"], zorder = 4)
+    if(total_zone[4+i]!=0):
+        pitch.scatter(111, (y_limit_zone[3*i]+y_limit_zone[3*i+1])/2, alpha = 0.6, s=(completed_zone[4+i]/total_zone[4+i])*10000, color='lightblue', ax=ax['pitch'])
+        pitch.annotate(str(completed_zone[4+i])+"/"+str(total_zone[4+i]), xy=(111, (y_limit_zone[3*i]+y_limit_zone[3*i+1])/2), c='black', va='center', ha='center', weight = "bold", size=16, ax=ax["pitch"], zorder = 4)
 
 pitch.annotate("Blue : the pass through the box\nGold : the pass reiceves in the box\n Diameter of the circle represents the accuracy", xy=(30,10), c='black', va='center', ha='center', weight = "bold", size=16, ax=ax["pitch"], zorder = 4)
 fig.suptitle("passes through penalty area by area on pitch and their success in the box", fontsize=25)
