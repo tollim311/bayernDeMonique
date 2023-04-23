@@ -9,7 +9,7 @@ import sys
 
 
 def get_danger_pass(file, output1, output2):
-    with open ('StatsBomb/Data/' + file) as t:
+    with open ("./StatsBomb/Data/" + file) as t:
         data=json.load(t)
 
     data=pd.DataFrame(data)
@@ -75,6 +75,7 @@ def get_danger_pass(file, output1, output2):
     data_pass['pass_outcome']=pass_outcome
 
     colors = list(clr.TABLEAU_COLORS)
+    colors.extend(['yellow', 'coral', 'lime', 'indigo', 'navy', 'slategrey', 'deeppink', 'black'])
     x_arrows=[]
     y_arrows=[]
     end_x_arrows=[]
@@ -148,7 +149,4 @@ def get_danger_pass(file, output1, output2):
 
     plt.savefig(output2)
     plt.close()
-    return(output1, output2)
-
-
-get_danger_pass('ManCity_Arsenal_events.json', 'arrows.png', 'img.png')
+    return output1 , output2
