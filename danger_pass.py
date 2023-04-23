@@ -9,7 +9,7 @@ import sys
 
 
 def get_danger_pass(file, output1, output2):
-    with open (file) as t:
+    with open ('StatsBomb/Data/' + file) as t:
         data=json.load(t)
 
     data=pd.DataFrame(data)
@@ -115,7 +115,6 @@ def get_danger_pass(file, output1, output2):
         danger_passes_period = passes.loc[pass_to_shot].reset_index(drop=True)
         n=len(danger_passes_period['time']) -1
         k=0
-        print(danger_passes_period['time'][1])
 
         for i in range(n):
             if(danger_passes_period['time'][i] < danger_passes_period['time'][i+1]-15):
@@ -147,9 +146,9 @@ def get_danger_pass(file, output1, output2):
     #legend to our plot
     cbar = plt.colorbar(pcm)
 
-    plt.savefig(output1)
+    plt.savefig(output2)
     plt.close()
     return(output1, output2)
 
 
-get_danger_pass('StatsBomb/Data/ManCity_Arsenal_events.json', 'arrows.png', 'img.png')
+get_danger_pass('ManCity_Arsenal_events.json', 'arrows.png', 'img.png')
