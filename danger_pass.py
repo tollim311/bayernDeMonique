@@ -4,8 +4,11 @@ import pandas as pd
 from mplsoccer import Pitch
 import matplotlib.pyplot as plt
 import math
+import sys
 
-with open ('StatsBomb/Data/ManCity_Arsenal_events.json') as t:
+files=sys.argv[1]
+
+with open (files) as t:
     data=json.load(t)
 
 data=pd.DataFrame(data)
