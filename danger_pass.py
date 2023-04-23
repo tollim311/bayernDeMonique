@@ -8,7 +8,7 @@ import math
 import sys
 
 
-def get_danger_pass(file, output):
+def get_danger_pass(file, output1, output2):
     with open (file) as t:
         data=json.load(t)
 
@@ -134,8 +134,11 @@ def get_danger_pass(file, output):
         #concatenate dataframe with a previous one to keep danger passes from the whole tournament
         danger_passes = pd.concat([danger_passes, danger_passes_period])
 
+    plt.savefig(output1)
+    plt.close()
 
-    """
+    pitch = Pitch(line_zorder=2, line_color='grey')
+    fig, ax = pitch.grid(grid_height=0.9, title_height=0.06, axis=False,endnote_height=0.04, title_space=0, endnote_space=0)
     #get the 2D histogram
     bin_statistic = pitch.bin_statistic(danger_passes.pass_loc_x, danger_passes.pass_loc_y, statistic='count', bins=(6,5), normalize=False)
 
@@ -143,11 +146,10 @@ def get_danger_pass(file, output):
     pcm  = pitch.heatmap(bin_statistic, cmap="Reds", edgecolor='grey', ax=ax['pitch'])
     #legend to our plot
     cbar = plt.colorbar(pcm)
-    """
 
-    plt.savefig(output)
+    plt.savefig(output1)
     plt.close()
-    return(output)
+    return(output1, output2)
 
 
-get_danger_pass('StatsBomb/Data/ManCity_Arsenal_events.json', 'img.png')
+get_danger_pass('StatsBomb/Data/ManCity_Arsenal_events.json', 'arrows.png', 'img.png')
