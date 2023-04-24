@@ -25,8 +25,8 @@ def get_heatmap(file, output, team, numeromaillot):
                         playerpositionx.append(data[j]['homePlayers'][i]['xyz'][0])
                         playerpositiony.append(data[j]['homePlayers'][i]['xyz'][1])
                     else: 
-                        playerpositionx.append(data[j]['homePlayers'][i]['xyz'][0])
-                        playerpositiony.append(data[j]['homePlayers'][i]['xyz'][1])
+                        playerpositionx.append(-data[j]['homePlayers'][i]['xyz'][0])
+                        playerpositiony.append(-data[j]['homePlayers'][i]['xyz'][1])
         elif team=="2":
             for i in range (0,len(data[j]['awayPlayers'])):
                 if data[j]['awayPlayers'][i]['number']==numeromaillot:
@@ -34,8 +34,8 @@ def get_heatmap(file, output, team, numeromaillot):
                         playerpositionx.append(data[j]['awayPlayers'][i]['xyz'][0])
                         playerpositiony.append(data[j]['awayPlayers'][i]['xyz'][1])
                     else: 
-                        playerpositionx.append(data[j]['awayPlayers'][i]['xyz'][0])
-                        playerpositiony.append(data[j]['awayPlayers'][i]['xyz'][1])
+                        playerpositionx.append(-data[j]['awayPlayers'][i]['xyz'][0])
+                        playerpositiony.append(-data[j]['awayPlayers'][i]['xyz'][1])
 
     pitch = Pitch(pitch_type='secondspectrum', line_zorder=2,
                   pitch_length=longueurTerrain, pitch_width=largeurTerrain,
