@@ -6,7 +6,7 @@ from pass_area import get_pass_area_data
 from danger_pass import get_danger_pass
 from heatmap import get_heatmap
 from teamheatmap import get_teamheatmap
-
+from sprint import get_sprint
 
 app = Flask(__name__)
 CORS(app)
@@ -45,7 +45,6 @@ def danger_pass(file):
 
 @app.route('/teamheatmap/<file>')
 def teamheatmap(file):
-    print(file)
     if os.path.isfile("./reports/" + file+"_team1heatmap.png"):
         output = ["./reports/" + file+"_team1heatmap.png","./reports/" + file+"_team2heatmap.png"]
     else:
@@ -82,6 +81,18 @@ def all(file):
     }
 
     return(jsonify(rep))
+
+@app.route('/highintensity/<file>')
+def highintensity(file):
+    if os.path.isfile("./reports/" + file+"_team1sprint.png"):
+        output = ["./reports/" + file+"_team1sprint.png","./reports/" + file+"_team2sprint.png"]
+    else:
+        output = get_sprint(file,   "./reports/"+file+"_team1sprint.png", "./reports/"+file+"_team2sprint.png")
+    rep = {
+        'team1': output[0],
+        'team2': output[1]
+    }
+    return jsonify(rep)
 
 
 if __name__ == '__main__':

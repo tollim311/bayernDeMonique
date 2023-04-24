@@ -134,6 +134,7 @@ def get_danger_pass(file, output1, output2):
         #concatenate dataframe with a previous one to keep danger passes from the whole tournament
         danger_passes = pd.concat([danger_passes, danger_passes_period])
 
+    fig.suptitle("Passes area lead to a shot", fontsize=25)
     plt.savefig(output1)
     plt.close()
 
@@ -146,6 +147,7 @@ def get_danger_pass(file, output1, output2):
     pcm  = pitch.heatmap(bin_statistic, cmap="Reds", edgecolor='grey', ax=ax['pitch'])
     #legend to our plot
     cbar = plt.colorbar(pcm)
+    fig.suptitle("Passes scheme lead to a shot", fontsize=25)
 
     plt.savefig(output2)
     plt.close()

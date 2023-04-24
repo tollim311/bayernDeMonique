@@ -144,8 +144,8 @@ def get_pass_area_data(file,output):
             pitch.scatter(111, (y_limit_zone[3*i]+y_limit_zone[3*i+1])/2, alpha = 0.6, s=(completed_zone[4+i]/total_zone[4+i])*10000, color='lightblue', ax=ax['pitch'])
             pitch.annotate(str(completed_zone[4+i])+"/"+str(total_zone[4+i]), xy=(111, (y_limit_zone[3*i]+y_limit_zone[3*i+1])/2), c='black', va='center', ha='center', weight = "bold", size=16, ax=ax["pitch"], zorder = 4)
 
-    pitch.annotate("Blue : the pass through the box\nGold : the pass reiceves in the box\n Diameter of the circle represents the accuracy", xy=(30,10), c='black', va='center', ha='center', weight = "bold", size=16, ax=ax["pitch"], zorder = 4)
-    fig.suptitle("passes through penalty area by area on pitch and their success in the box", fontsize=25)
+    pitch.annotate("Blue : the pass through the box\nGold : the pass reiceves in the box\n Diameter of the circle : the accuracy", xy=(30,10), c='black', va='center', ha='center', weight = "bold", size=16, ax=ax["pitch"], zorder = 4)
+    fig.suptitle("Passes through penalty area", fontsize=25)
     plt.savefig(output)
     plt.close()
     return output

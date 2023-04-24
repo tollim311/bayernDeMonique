@@ -14,13 +14,23 @@
         <select id="my-select"></select>
         <button onclick="getHeatmap()">Choose a heatmap</button>
         <button onclick="getTeamheatmap()">Show the heatmap of both teams</button>
+        
+        <a onclick="gethighintensity()"><button>Show number of sprint of team</button></a>
+        
         <a href="index.html"><button>Back to the stats</button></a>
+        
     </div>
+    
     <div id="team_map">
 
     </div>
 
     <div id="map">
+    </div>
+
+    <div id="sprint_map">
+
+    
 
     </div>
     <style>
@@ -49,7 +59,7 @@
             padding: 1em;
         }
 
-        #map, #team_map {
+        #map, #team_map, #sprint_map{
             width: 100%;
             height: 50vh;
             display: flex;
@@ -153,7 +163,7 @@
             const mainDiv = document.createElement("div");
             var n=(document.getElementsByClassName("temp")).length;
             mainDiv.className = "temp";
-            mainDiv.id="team_" + n;
+            mainDiv.id="sprint_" + n;
 
             var selectElement=document.getElementById("my-select");
             var file = selectElement.value;
@@ -161,7 +171,7 @@
             var button = document.createElement("button");
             button.innerHTML = "Remove";
             button.addEventListener("click", function() {
-              var div_delete = document.getElementById('team_' + n);
+              var div_delete = document.getElementById('sprint_' + n);
               div_delete.remove();
             });
             var p=document.createElement("p");
@@ -197,9 +207,55 @@
                 });
 
                 content.appendChild(mainDiv);
+        }
 
+        function gethighintensity(){
 
+            const content = document.getElementById("sprint_map");
+            const mainDiv = document.createElement("div");
+            var n=(document.getElementsByClassName("temp")).length;
+            mainDiv.className = "temp";
+            mainDiv.id=n;
 
+            var selectElement=document.getElementById("my-select");
+            var file = selectElement.value;
+
+            var button = document.createElement("button");
+            button.innerHTML = "Remove";
+            button.addEventListener("click", function() {
+              var div_delete = document.getElementById(n);
+              div_delete.remove();
+            });
+            var p=document.createElement("p");
+            p.appendChild(button);
+            mainDiv.appendChild(p);
+
+            fetch("http://localhost:5000/highintensity/" + file)
+                .then(response => response.json())
+                .then(data => {
+                    const im = document.createElement("img");
+                    im.src = "http://localhost:5000/" + data["team1"];
+                    im.addEventListener("click", () => {
+                        // image.classList.toggle("big");
+                        console.log(im.src);
+                        window.open(im.src);
+                    });
+                    mainDiv.appendChild(im);
+
+                    const im2 = document.createElement("img");
+                    im2.src = "http://localhost:5000/" + data["team2"];
+                    im2.addEventListener("click", () => {
+                        // image.classList.toggle("big");
+                        console.log(im2.src);
+                        window.open(im2.src);
+                    });
+                    mainDiv.appendChild(im2);
+
+                })
+                .catch(error => {
+                    console.error("Error fetching data from API:", error);
+                });
+                content.appendChild(mainDiv);
         }
 
     </script>
