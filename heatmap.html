@@ -87,7 +87,7 @@
                     const optionElement = document.createElement("option");
                     let game = item.split("_");
                     optionElement.textContent= game[0];
-                    optionElement.value = item; // Use whatever property of the item you want to use as the option value
+                    optionElement.value = game[0]; // Use whatever property of the item you want to use as the option value
                     selectElement.appendChild(optionElement);
                 });
             })
@@ -100,35 +100,50 @@
 
             const content = document.getElementById("map");
             const mainDiv = document.createElement("div");
+            var n=(document.getElementsByClassName("temp")).length;
             mainDiv.className = "temp";
+            mainDiv.id=n;
 
             var player = prompt("Enter the player number you want her heatmap");
             var team = prompt("Enter 1 for home team or 2 for away team");
+            if((team=='1' || team=='2') && player!=""){
+                var selectElement=document.getElementById("my-select");
+                var file = selectElement.value;
 
-            fetch("http://localhost:5000/heatmap" + '?file=g2312135&number='+player+'&team='+team)
-                .then(response => response.json())
-                .then(data => {
-
-                    const h2 = document.createElement("h2");
-                    team=1;
-                    h2.textContent = "Heatmap of player n°" + player;
-                    mainDiv.appendChild(h2);
-
-                    const im = document.createElement("img");
-                    im.src = "http://localhost:5000/" + data;
-                    im.addEventListener("click", () => {
-                        // image.classList.toggle("big");
-                        console.log(im.src);
-                        window.open(im.src);
-                    });
-                    mainDiv.appendChild(im);
-
-                })
-                .catch(error => {
-                    console.error("Error fetching data from API:", error);
+                var button = document.createElement("button");
+                button.innerHTML = "Remove";
+                button.addEventListener("click", function() {
+                  var div_delete = document.getElementById(n);
+                  div_delete.remove();
                 });
+                mainDiv.appendChild(button);
 
-                content.appendChild(mainDiv);
+                fetch("http://localhost:5000/heatmap" + '?file=' + file + '&number='+player+'&team='+team)
+                    .then(response => response.json())
+                    .then(data => {
+
+                        const h2 = document.createElement("h2");
+                        team=1;
+                        h2.textContent = "Heatmap of player n°" + player;
+                        mainDiv.appendChild(h2);
+
+                        const im = document.createElement("img");
+                        im.src = "http://localhost:5000/" + data;
+                        im.addEventListener("click", () => {
+                            // image.classList.toggle("big");
+                            console.log(im.src);
+                            window.open(im.src);
+                        });
+                        mainDiv.appendChild(im);
+
+                    })
+                    .catch(error => {
+                        console.error("Error fetching data from API:", error);
+                    });
+
+                    content.appendChild(mainDiv);
+
+            }
 
         }
 

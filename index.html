@@ -13,7 +13,7 @@
         <select id="my-select"></select>
         <button onclick="getAll()">Show stats</button>
 
-        <button onclick="getHeatmap()">Heatmap</button>
+        <a href="heatmap.html"><button>Heatmap</button></a>
     </div>
 
     <div id="map">
@@ -117,6 +117,13 @@
 
                     const h2 = document.createElement("h2");
                     h2.textContent = "Pass area";
+                    var button = document.createElement("button");
+                    button.innerHTML = "Remove";
+                    button.addEventListener("click", function() {
+                      var div_delete = document.getElementById(n);
+                      div_delete.remove();
+                    });
+                    mainDiv.appendChild(button);
                     mainDiv.appendChild(h2);
 
                     const im = document.createElement("img");
