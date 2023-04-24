@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, send_from_directory, request
 from flask_cors import CORS
 import os
+import json
 
 from pass_area import get_pass_area_data
 from danger_pass import get_danger_pass
@@ -17,6 +18,7 @@ def list_files():
     folder_path = "./StatsBomb/Data/"
     files = [f for f in os.listdir(folder_path) if os.path.isfile(
         os.path.join(folder_path, f)) and f.endswith("events.json")]
+
     return jsonify(files)
 
 @app.route('/files_loc')
@@ -24,7 +26,20 @@ def list_files_loc():
     folder_path = "./Data/"
     files = [f for f in os.listdir(folder_path) if os.path.isfile(
         os.path.join(folder_path, f)) and f.endswith("meta.json")]
-    return jsonify(files)
+    
+        
+    data=[]
+    teamsname=[]
+    for file in files:
+        with open('Data/'+file,'r') as t:
+            data=json.load(t)
+        teamsname.append(data['description'])
+
+    rep = {
+        'files': files,
+        'names': teamsname
+    }
+    return jsonify(rep)
 
 @app.route('/pass/<file>')
 def pass_area(file):

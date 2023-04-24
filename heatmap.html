@@ -95,13 +95,16 @@
         fetch("http://localhost:5000/files_loc")
             .then(response => response.json())
             .then(data => {
+                var i=0;
                 // Loop through the data and create an option element for each item
-                data.forEach(item => {
+                data["files"].forEach(item => {
                     const optionElement = document.createElement("option");
-                    let game = item.split("_");
-                    optionElement.textContent= game[0];
-                    optionElement.value = game[0]; // Use whatever property of the item you want to use as the option value
+                    let game_name = data["names"][i].split(" ");
+                    let game=item.split("_");
+                    optionElement.value= game[0];
+                    optionElement.textContent = game_name[0] +" VS "+ game_name[2]; // Use whatever property of the item you want to use as the option value
                     selectElement.appendChild(optionElement);
+                    i=i+1;
                 });
             })
             .catch(error => {
