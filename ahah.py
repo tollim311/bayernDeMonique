@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import time as time
 
 #data to read a game in 2D
-#create by matthieu
+#create by matthieu je t aime bb
 data=[]
 with open('Data/MCI Womens/MCI Womens Files/g2312135_SecondSpectrum_tracking-produced.jsonl','r') as f:
     for line in  f:
