@@ -5,6 +5,7 @@ import os
 from pass_area import get_pass_area_data
 from danger_pass import get_danger_pass
 from heatmap import get_heatmap
+from teamheatmap import get_teamheatmap
 
 
 app = Flask(__name__)
@@ -18,7 +19,12 @@ def list_files():
         os.path.join(folder_path, f)) and f.endswith("events.json")]
     return jsonify(files)
 
-
+@app.route('/files_loc')
+def list_files_loc():
+    folder_path = "./Data/"
+    files = [f for f in os.listdir(folder_path) if os.path.isfile(
+        os.path.join(folder_path, f)) and f.endswith("meta.json")]
+    return jsonify(files)
 
 @app.route('/pass/<file>')
 def pass_area(file):
@@ -28,18 +34,27 @@ def pass_area(file):
         output = get_pass_area_data(file,   "./reports/" + file+"_pass_area.png")
     return (output)
 
-
 @app.route('/danger_pass/<file>')
 def danger_pass(file):
     if os.path.isfile("./reports/" + file+"_danger_pass_2.png"):
         output = ["./reports/" + file+"_danger_pass_1.png","reports/" + file+"_danger_pass_2.png"]
     else:
         output = get_danger_pass(file,   "./reports/" + file+"_danger_pass_1.png", "./reports/" + file+"_danger_pass_2.png")
-    rep = {
-        'out1': output[0],
-        'out2': output[1]
-    }
+
     return (output)
+
+@app.route('/teamheatmap/<file>')
+def teamheatmap(file):
+    print(file)
+    if os.path.isfile("./reports/" + file+"_team1heatmap.png"):
+        output = ["./reports/" + file+"_team1heatmap.png","./reports/" + file+"_team2heatmap.png"]
+    else:
+        output = get_teamheatmap(file,   "./reports/"+file+"_team1heatmap.png", "./reports/"+file+"_team2heatmap.png")
+    rep = {
+        'team1': output[0],
+        'team2': output[1]
+    }
+    return jsonify(rep)
 
 
 @app.route('/heatmap/',methods=['GET'])

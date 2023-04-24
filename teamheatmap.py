@@ -4,13 +4,15 @@ from mplsoccer import Pitch
 import numpy as np
 from scipy.ndimage import gaussian_filter
 
-def teamheatmap(file,output1,output2):
+def get_teamheatmap(file,output1,output2):
     data=[]
-    with open('Data/MCI Womens/MCI Womens Files/'+file+'_SecondSpectrum_tracking-produced.jsonl','r') as f:
+    with open('Data/'+file+'_SecondSpectrum_tracking-produced.jsonl','r') as f:
         for line in f:
             data.append(json.loads(line))
-    with open('Data/MCI Womens/MCI Womens Files/'+file+'_SecondSpectrum_meta.json','r') as t:
+
+    with open('Data/'+file+'_SecondSpectrum_meta.json','r') as t:
         datamatch=json.load(t)
+        
     longueurTerrain=datamatch['pitchLength']
     largeurTerrain=datamatch['pitchWidth']
     teamsname=datamatch['description']
@@ -21,6 +23,9 @@ def teamheatmap(file,output1,output2):
     playerpositiony2=[]
     homegoalkeeper=[]
     awaygoalkeeper=[]
+    for i in range(0,len(datamatch['homePlayers'])):
+        if datamatch['homePlayers'][i]['position']=="GK":
+            homegoalkeeper.append(int(datamatch['homePlayers'][i]['number']))
     for i in range(0,len(datamatch['awayPlayers'])):
         if datamatch['awayPlayers'][i]['position']=="GK":
             awaygoalkeeper.append(int(datamatch['awayPlayers'][i]['number']))

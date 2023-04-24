@@ -13,12 +13,14 @@
 
         <select id="my-select"></select>
         <button onclick="getHeatmap()">Choose a heatmap</button>
+        <button onclick="getTeamheatmap()">Show the heatmap of both teams</button>
         <a href="index.html"><button>Back to the stats</button></a>
+    </div>
+    <div id="team_map">
+
     </div>
 
     <div id="map">
-
-
 
     </div>
     <style>
@@ -47,9 +49,9 @@
             padding: 1em;
         }
 
-        #map {
+        #map, #team_map {
             width: 100%;
-            height: 100vh;
+            height: 50vh;
             display: flex;
             align-items: center;
             justify-content: flex-start
@@ -117,16 +119,14 @@
                   var div_delete = document.getElementById(n);
                   div_delete.remove();
                 });
-                mainDiv.appendChild(button);
+                var p=document.createElement("p");
+
+                p.appendChild(button);
+                mainDiv.appendChild(p);
 
                 fetch("http://localhost:5000/heatmap" + '?file=' + file + '&number='+player+'&team='+team)
                     .then(response => response.json())
                     .then(data => {
-
-                        const h2 = document.createElement("h2");
-                        team=1;
-                        h2.textContent = "Heatmap of player n°" + player;
-                        mainDiv.appendChild(h2);
 
                         const im = document.createElement("img");
                         im.src = "http://localhost:5000/" + data;
@@ -145,6 +145,60 @@
                     content.appendChild(mainDiv);
 
             }
+
+        }
+
+        function getTeamheatmap(){
+            const content = document.getElementById("team_map");
+            const mainDiv = document.createElement("div");
+            var n=(document.getElementsByClassName("temp")).length;
+            mainDiv.className = "temp";
+            mainDiv.id="team_" + n;
+
+            var selectElement=document.getElementById("my-select");
+            var file = selectElement.value;
+
+            var button = document.createElement("button");
+            button.innerHTML = "Remove";
+            button.addEventListener("click", function() {
+              var div_delete = document.getElementById('team_' + n);
+              div_delete.remove();
+            });
+            var p=document.createElement("p");
+
+            p.appendChild(button);
+            mainDiv.appendChild(p);
+
+            fetch("http://localhost:5000/teamheatmap/" + file)
+                .then(response => response.json())
+                .then(data => {
+
+                    const im = document.createElement("img");
+                    im.src = "http://localhost:5000/" + data["team1"];
+                    im.addEventListener("click", () => {
+                        // image.classList.toggle("big");
+                        console.log(im.src);
+                        window.open(im.src);
+                    });
+                    mainDiv.appendChild(im);
+
+                    const im2 = document.createElement("img");
+                    im2.src = "http://localhost:5000/" + data["team2"];
+                    im2.addEventListener("click", () => {
+                        // image.classList.toggle("big");
+                        console.log(im2.src);
+                        window.open(im2.src);
+                    });
+                    mainDiv.appendChild(im2);
+
+                })
+                .catch(error => {
+                    console.error("Error fetching data from API:", error);
+                });
+
+                content.appendChild(mainDiv);
+
+
 
         }
 

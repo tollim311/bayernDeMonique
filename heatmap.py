@@ -57,7 +57,7 @@ def get_heatmap(file, output, team, numeromaillot):
     cbar = fig.colorbar(pcm, ax=ax, shrink=0.6)
     cbar.outline.set_edgecolor('#efefef')
     cbar.ax.yaxis.set_tick_params(color='#efefef')
-    ticks = plt.setp(plt.getp(cbar.ax.axes, 'yticklabels'), color='#efefef')
+    ticks = plt.setp(plt.getp(cbar.ax.axes, 'yticklabels'), color='black')
     fig.suptitle("Heatmap of "+label, x=0.5,fontsize=20)
 
     plt.savefig(output)
