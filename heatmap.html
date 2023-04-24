@@ -10,6 +10,8 @@
 
 <body>
     <div id="header">
+
+        <select id="my-select"></select>
         <button onclick="getHeatmap()">Heatmap</button>
     </div>
 
@@ -76,23 +78,22 @@
     </style>
     <script>
 
-function get_pass_area() {
-            const selectElement = document.getElementById("my-select");
-            const div = document.getElementById("map");
-            fetch("http://localhost:5000/pass_area/" + selectElement.value)
-                .then(response => response.json())
-                .then(data => {
-
-                    const im = document.createElement("img");
-                    im.src = "http://localhost:5000/" + data;
-
-                    div.appendChild(im);
-
-                })
-                .catch(error => {
-                    console.error("Error fetching data from API:", error);
+        const selectElement = document.getElementById("my-select");
+        fetch("http://localhost:5000/files")
+            .then(response => response.json())
+            .then(data => {
+                // Loop through the data and create an option element for each item
+                data.forEach(item => {
+                    const optionElement = document.createElement("option");
+                    let game = item.split("_");
+                    optionElement.textContent= game[0] + " VS " + game[1]
+                    optionElement.value = item; // Use whatever property of the item you want to use as the option value
+                    selectElement.appendChild(optionElement);
                 });
-        }
+            })
+            .catch(error => {
+                console.error("Error fetching data from API:", error);
+            });
 
         function getHeatmap(){
 
@@ -100,11 +101,6 @@ function get_pass_area() {
             const mainDiv = document.createElement("div");
             mainDiv.className = "temp";
             const selectElement = document.getElementById("my-select");
-            let txt = selectElement.value;
-            let title = txt.split("_");
-            const h1 = document.createElement("h1");
-            h1.textContent = title[0] + " vs " + title[1];
-            mainDiv.appendChild(h1);
 
             var player = prompt("Enter the player number you want her heatmap");
             var team = prompt("Enter 1 for home team or 2 for away team");

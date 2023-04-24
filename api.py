@@ -47,8 +47,8 @@ def heatmap():
     file=request.args['file']
     number=request.args['number']
     team=request.args['team']
-    if os.path.isfile("reports/" + file+"_heatmap.png"):
-        output = "reports/" + file+"_heatmap.png"
+    if os.path.isfile("reports/" + file+"_"+team+"_"+number+"_heatmap.png"):
+        output = "reports/" + file+"_"+team+"_"+number+"_heatmap.png"
     else:
         output = get_heatmap(file,   "reports/" + file+"_"+team+"_"+number+"_heatmap.png",team,number)
     return jsonify(output)
