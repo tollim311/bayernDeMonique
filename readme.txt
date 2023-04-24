@@ -13,4 +13,4 @@ flask run -h localhost -p 5000
 
 Finally open index.html in your browser and here it is, you can generate the data for analysis
 
-To have a full access to the data, it require to add the folder Data with the files of SecondSpectrum (which is too big to fit on github)
+To have a full access to the data, it require to add in the folder Data the files of SecondSpectrum (which is too big to fit on github)
