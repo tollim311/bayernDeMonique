@@ -49,7 +49,7 @@ def get_heatmap(file, output, team, numeromaillot):
                   pitch_color='#22312b', line_color='#efefef')
     # draw
     fig, ax = pitch.draw(figsize=(6.6, 4.125))
-    fig.set_facecolor('#22312b')
+    fig.set_facecolor('white')
     bin_statistic = pitch.bin_statistic(np.array(playerpositionx),np.array(playerpositiony), statistic='count', bins=(25, 25))
     bin_statistic['statistic'] = gaussian_filter(bin_statistic['statistic'], 1)
     pcm = pitch.heatmap(bin_statistic, ax=ax, cmap='hot', edgecolors='#22312b')
