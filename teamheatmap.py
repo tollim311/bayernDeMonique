@@ -21,6 +21,9 @@ def teamheatmap(file,output1,output2):
     playerpositiony2=[]
     homegoalkeeper=[]
     awaygoalkeeper=[]
+    for i in range(0,len(datamatch['homePlayers'])):
+        if datamatch['homePlayers'][i]['position']=="GK":
+            homegoalkeeper.append(int(datamatch['homePlayers'][i]['number']))
     for i in range(0,len(datamatch['awayPlayers'])):
         if datamatch['awayPlayers'][i]['position']=="GK":
             awaygoalkeeper.append(int(datamatch['awayPlayers'][i]['number']))
