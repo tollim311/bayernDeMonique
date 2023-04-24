@@ -17,8 +17,12 @@ def get_heatmap(file, output, team, numeromaillot):
     nbFrames=len(data)
     playerpositionx=[]
     playerpositiony=[]
+    label=''
     for j in range(0,nbFrames): 
         if team=="1":
+            for i in range(0,len(datamatch['homePlayers'])):
+                if datamatch['homePlayers'][i]['number']==numeromaillot:
+                    label=datamatch['homePlayers'][i]['name']
             for i in range (0,len(data[j]['homePlayers'])):
                 if data[j]['homePlayers'][i]['number']==numeromaillot:
                     if data[j]["period"]==1:
@@ -28,6 +32,9 @@ def get_heatmap(file, output, team, numeromaillot):
                         playerpositionx.append(-data[j]['homePlayers'][i]['xyz'][0])
                         playerpositiony.append(-data[j]['homePlayers'][i]['xyz'][1])
         elif team=="2":
+            for i in range(0,len(datamatch['awayPlayers'])):
+                if datamatch['awayPlayers'][i]['number']==numeromaillot:
+                    label=datamatch['awayPlayers'][i]['name']
             for i in range (0,len(data[j]['awayPlayers'])):
                 if data[j]['awayPlayers'][i]['number']==numeromaillot:
                     if data[j]["period"]==1:
@@ -51,6 +58,7 @@ def get_heatmap(file, output, team, numeromaillot):
     cbar.outline.set_edgecolor('#efefef')
     cbar.ax.yaxis.set_tick_params(color='#efefef')
     ticks = plt.setp(plt.getp(cbar.ax.axes, 'yticklabels'), color='#efefef')
+    fig.suptitle("Heatmap of "+label, x=0.5,fontsize=20)
 
     plt.savefig(output)
     plt.close()
