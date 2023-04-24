@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, send_from_directory
+from flask import Flask, jsonify, send_from_directory, request
 from flask_cors import CORS
 import os
 
@@ -42,12 +42,15 @@ def danger_pass(file):
     return (output)
 
 
-@app.route('/heatmap/<file>')
-def heatmap(file):
+@app.route('/heatmap/',methods=['GET'])
+def heatmap():
+    file=request.args['file']
+    number=request.args['number']
+    team=request.args['team']
     if os.path.isfile("reports/" + file+"_heatmap.png"):
         output = "reports/" + file+"_heatmap.png"
     else:
-        output = get_heatmap(file,   "reports/" + file+"_heatmap.png")
+        output = get_heatmap(file,   "reports/" + file+"_"+team+"_"+number+"_heatmap.png",team,number)
     return jsonify(output)
 
 

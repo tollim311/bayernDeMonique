@@ -12,6 +12,8 @@
     <div id="header">
         <select id="my-select"></select>
         <button onclick="getAll()">Show stats</button>
+
+        <button onclick="getHeatmap()">Heatmap</button>
     </div>
 
     <div id="map">
@@ -102,34 +104,6 @@
             const selectElement = document.getElementById("my-select");
             let txt = selectElement.value;
             let title = txt.split("_");
-            const h1 = document.createElement("h1");
-            h1.textContent = title[0] + " vs " + title[1];
-            mainDiv.appendChild(h1);
-
-/*            fetch("http://localhost:5000/pass/" + selectElement.value)
-                .then(response => response.json())
-                .then(data => {
-
-                    const h2 = document.createElement("h2");
-                    h2.textContent = "Pass area";
-                    mainDiv.appendChild(h2);
-
-                    const im = document.createElement("img");
-                    im.src = "http://localhost:5000/" + data;
-                    im.addEventListener("click", () => {
-                        // image.classList.toggle("big");
-                        console.log(im.src);
-                        window.open(im.src);
-                    });
-                    mainDiv.appendChild(im);
-
-                    
-
-                })
-                .catch(error => {
-                    console.error("Error fetching data from API:", error);
-                });
-*/
             fetch("http://localhost:5000/all/" + selectElement.value)
                 .then(response => response.json())
                 .then(data => {
@@ -196,6 +170,48 @@
                 .catch(error => {
                     console.error("Error fetching data from API:", error);
                 });
+        }
+
+        function getHeatmap(){
+
+            const content = document.getElementById("map");
+            const mainDiv = document.createElement("div");
+            mainDiv.className = "temp";
+            const selectElement = document.getElementById("my-select");
+            let txt = selectElement.value;
+            let title = txt.split("_");
+            const h1 = document.createElement("h1");
+            h1.textContent = title[0] + " vs " + title[1];
+            mainDiv.appendChild(h1);
+
+            var player = prompt("Enter the player number you want her heatmap");
+            var team = prompt("Enter 1 for home team or 2 for away team");
+
+            fetch("http://localhost:5000/heatmap" + '?file=g2312135&number='+player+'&team='+team)
+                .then(response => response.json())
+                .then(data => {
+
+                    const h2 = document.createElement("h2");
+                    team=1;
+                    h2.textContent = "Heatmap of player n°" + player;
+                    mainDiv.appendChild(h2);
+
+                    const im = document.createElement("img");
+                    im.src = "http://localhost:5000/" + data;
+                    im.addEventListener("click", () => {
+                        // image.classList.toggle("big");
+                        console.log(im.src);
+                        window.open(im.src);
+                    });
+                    mainDiv.appendChild(im);
+
+                })
+                .catch(error => {
+                    console.error("Error fetching data from API:", error);
+                });
+
+                content.appendChild(mainDiv);
+
         }
 
         
