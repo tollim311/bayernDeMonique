@@ -12,7 +12,7 @@
     <div id="header">
 
         <select id="my-select"></select>
-        <button onclick="getHeatmap()">Heatmap</button>
+        <button onclick="getHeatmap()">Choose a heatmap</button>
     </div>
 
     <div id="map">
@@ -79,14 +79,14 @@
     <script>
 
         const selectElement = document.getElementById("my-select");
-        fetch("http://localhost:5000/files")
+        fetch("http://localhost:5000/files_loc")
             .then(response => response.json())
             .then(data => {
                 // Loop through the data and create an option element for each item
                 data.forEach(item => {
                     const optionElement = document.createElement("option");
                     let game = item.split("_");
-                    optionElement.textContent= game[0] + " VS " + game[1]
+                    optionElement.textContent= game[0];
                     optionElement.value = item; // Use whatever property of the item you want to use as the option value
                     selectElement.appendChild(optionElement);
                 });
@@ -95,12 +95,12 @@
                 console.error("Error fetching data from API:", error);
             });
 
+
         function getHeatmap(){
 
             const content = document.getElementById("map");
             const mainDiv = document.createElement("div");
             mainDiv.className = "temp";
-            const selectElement = document.getElementById("my-select");
 
             var player = prompt("Enter the player number you want her heatmap");
             var team = prompt("Enter 1 for home team or 2 for away team");

@@ -101,10 +101,16 @@
         function getAll() {
             const content = document.getElementById("map");
             const mainDiv = document.createElement("div");
+            var n=(document.getElementsByClassName("temp")).length;
             mainDiv.className = "temp";
+            mainDiv.id=n;
             const selectElement = document.getElementById("my-select");
-            let txt = selectElement.value;
-            let title = txt.split("_");
+            let text = selectElement.value;
+            let game = text.split("_");
+            const h1 = document.createElement("h1");
+            h1.textContent = game[0] + " VS " + game[1];
+
+            mainDiv.appendChild(h1);
             fetch("http://localhost:5000/all/" + selectElement.value)
                 .then(response => response.json())
                 .then(data => {
